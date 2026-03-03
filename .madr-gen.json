@@ -1,0 +1,13 @@
+{
+  "adrDirectory": "docs/decisions",
+  "templateStyle": "full",
+  "language": "auto",
+  "autoSuggest": true,
+  "categories": [
+    "technology",
+    "architecture",
+    "convention",
+    "infrastructure",
+    "refactoring"
+  ]
+}
