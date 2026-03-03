@@ -8,24 +8,46 @@ Claude Code 세션 중 중요한 아키텍처 결정을 내릴 때마다 — 라
 
 ## 설치
 
-Claude Code 플러그인은 `~/.claude/plugins/` 폴더에 배치하면 자동으로 인식됩니다. `madr-gen`은 아래 두 가지 방법으로 설치할 수 있습니다.
+Claude Code는 플러그인 시스템을 내장하고 있습니다. Claude Code 안에서 아래 두 커맨드를 실행하면 `madr-gen`을 설치할 수 있습니다.
 
-**방법 A — 플러그인 폴더에 직접 클론**
+**Step 1 — 이 저장소를 마켓플레이스로 등록**
 
-```bash
-git clone https://github.com/JiHongKim98/madr-gen.git ~/.claude/plugins/madr-gen
+```
+/plugin marketplace add JiHongKim98/madr-gen
 ```
 
-**방법 B — 로컬 클론 후 심링크**
+**Step 2 — 플러그인 설치**
 
-```bash
-git clone https://github.com/JiHongKim98/madr-gen.git ~/projects/madr-gen
-ln -s ~/projects/madr-gen ~/.claude/plugins/madr-gen
+```
+/plugin install madr-gen@JiHongKim98/madr-gen
 ```
 
-설치 후 Claude Code를 재실행(또는 리로드)하면 플러그인이 자동으로 로드됩니다.
+이것으로 끝입니다. 이후 모든 세션에서 `/madr` 커맨드를 사용할 수 있습니다.
 
-> **확인:** Claude Code에서 `/plugins` 를 실행해서 `madr-gen` 이 목록에 나타나면 설치 완료입니다.
+### 설치 범위(scope) 옵션
+
+기본값은 현재 사용자 전체에 적용됩니다. `--scope` 옵션으로 범위를 변경할 수 있습니다:
+
+| 범위 | 커맨드 | 설명 |
+|------|--------|------|
+| `user` *(기본값)* | `--scope user` | 모든 프로젝트에서 사용 가능 |
+| `project` | `--scope project` | `.claude/settings.json` 에 저장, git으로 팀 공유 가능 |
+| `local` | `--scope local` | 현재 프로젝트 로컬 전용, gitignore 처리됨 |
+
+```
+# 예시: 팀원과 플러그인 공유
+/plugin install madr-gen@JiHongKim98/madr-gen --scope project
+```
+
+### 플러그인 관리 커맨드
+
+```
+/plugin                                           # 플러그인 UI 열기
+/plugin marketplace list                          # 등록된 마켓플레이스 목록
+/plugin update madr-gen@JiHongKim98/madr-gen     # 최신 버전으로 업데이트
+/plugin uninstall madr-gen@JiHongKim98/madr-gen  # 플러그인 제거
+/plugin disable madr-gen@JiHongKim98/madr-gen    # 제거하지 않고 비활성화
+```
 
 ## 사용법
 

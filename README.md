@@ -8,24 +8,46 @@ Every time you make a significant architectural decision in a Claude Code sessio
 
 ## Installation
 
-Claude Code plugins are installed by placing them in `~/.claude/plugins/`. You can install `madr-gen` in two ways:
+Claude Code has a built-in plugin system. Run the following two commands inside Claude Code to install `madr-gen`:
 
-**Option A — Clone directly into the plugins folder**
+**Step 1 — Register this repository as a marketplace**
 
-```bash
-git clone https://github.com/JiHongKim98/madr-gen.git ~/.claude/plugins/madr-gen
+```
+/plugin marketplace add JiHongKim98/madr-gen
 ```
 
-**Option B — Symlink from a local clone**
+**Step 2 — Install the plugin**
 
-```bash
-git clone https://github.com/JiHongKim98/madr-gen.git ~/projects/madr-gen
-ln -s ~/projects/madr-gen ~/.claude/plugins/madr-gen
+```
+/plugin install madr-gen@JiHongKim98/madr-gen
 ```
 
-After placing the folder, Claude Code will automatically discover the plugin on next launch (or reload).
+That's it. The `/madr` command is now available in every session.
 
-> **Tip:** You can verify the plugin is recognized by running `/plugins` in Claude Code and checking that `madr-gen` appears in the list.
+### Scope options
+
+By default the plugin is installed for your user (all projects). You can change the scope with `--scope`:
+
+| Scope | Command | Effect |
+|-------|---------|--------|
+| `user` *(default)* | `--scope user` | Available in all projects |
+| `project` | `--scope project` | Stored in `.claude/settings.json`, shared with teammates via git |
+| `local` | `--scope local` | Project-local only, gitignored |
+
+```
+# Example: share with teammates via version control
+/plugin install madr-gen@JiHongKim98/madr-gen --scope project
+```
+
+### Other plugin commands
+
+```
+/plugin                                           # Open the interactive plugin UI
+/plugin marketplace list                          # List registered marketplaces
+/plugin update madr-gen@JiHongKim98/madr-gen     # Update to latest version
+/plugin uninstall madr-gen@JiHongKim98/madr-gen  # Remove the plugin
+/plugin disable madr-gen@JiHongKim98/madr-gen    # Disable without uninstalling
+```
 
 ## Usage
 
