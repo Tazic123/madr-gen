@@ -1,6 +1,6 @@
 {
   "name": "madr-gen",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Automatically analyze Claude Code sessions to detect architectural decisions and generate/update mADR (Markdown Any Decision Records) documents",
   "author": {
     "name": "JiHongKim98",
