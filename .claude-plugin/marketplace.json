@@ -9,7 +9,7 @@
     {
       "name": "madr-gen",
       "description": "Analyze sessions to detect architectural decisions and generate MADR 4.0 formatted records in docs/decisions/",
-      "source": "."
+      "source": "./"
     }
   ]
 }
